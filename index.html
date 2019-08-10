@@ -37,7 +37,7 @@
     /*
         you win alert
         next word/reset button
-        amount of wins/losses
+        amount of wins
 
     */
 
@@ -47,10 +47,11 @@
     let triedLetters = "";
     let guessesLeft = null;
     let typing = true;
+    let losses = 0;
 
-    /*************************************
-     * This shows the amount of blanks based on the word length
-    ************************************/
+    /************************************************************************
+     * This resets the word, blanks amount, and amount of allowable guesses *
+    *************************************************************************/
 
     let reset = function(){
         //when we are done this is pulled from an array but right now we are just using marie
@@ -61,22 +62,16 @@
 
         document.getElementById ("guessedWord").textContent = correctLetter ; 
 
-    /*************************************
-     * This counts wrong guesses
-    ************************************/
-
-    guessesLeft = (word.length * 2);
-    document.getElementById ("guessCount").textContent = "Remaining Guesses: " + guessesLeft ; 
-
-        
+        guessesLeft = (word.length * 2);
+        document.getElementById ("guessCount").textContent = "Remaining Guesses: " + guessesLeft ; 
     }
 
     reset();
 
     
-    /*************************************
-     * This sets the correct letter into the blank
-     ************************************/
+    /***********************************************************************
+     * This sets the correct letter into the blank and alerts when you win *
+     ***********************************************************************/
     let correct = function(typedLetter){
                     
         for (let i = 0; i < word.length; i++) { // Loops through every letter in word. index = x
@@ -87,25 +82,28 @@
         document.getElementById ("guessedWord").textContent = correctLetter ; 
     }
 
-    /*************************************
-     * This determines guesses left and alerts when you lose
-     ************************************/
+    /***********************************************************
+     * This handles incorrect letters and alerts when you lose *
+     ***********************************************************/
 
     let incorrect = function(typedLetter){
         guessesLeft--;
         document.getElementById ("guessCount").textContent = "Remaining Guesses: " + guessesLeft ; 
 
+
         if (guessesLeft === 0) {
-            document.getElementById ("guessCount").textContent = "YOU LOSE!" ; 
+            document.getElementById ("guessCount").textContent = "YOU LOSE!" ;
+            losses ++;
+            document.getElementById ("lossCount").textContent = "Losses: " + losses ; 
             typing = false;
 
         }
 
     }
 
-     /*************************************
-     * This allows you to only type letters and sends them to show where appropriate
-     ************************************/
+     /********************************************************************************
+     * This allows you to only type letters and sends them to show where appropriate *
+     *********************************************************************************/
 
     document.addEventListener('keydown', function(event) {
 
@@ -133,7 +131,6 @@
 
             }
         }
-
 
     });
 </script>  
