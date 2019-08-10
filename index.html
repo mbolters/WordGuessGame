@@ -24,7 +24,7 @@
         <p class= "lead" id="winCount">Wins: 0</p>
         <p class= "lead" id="lossCount">Losses: 0</p>
 
-        <button type="button" class="btn btn-primary">Reset!</button>
+        <button type="button" class="btn btn-primary" onclick="reset();">Reset!</button>
     </div>
 </div>
 
@@ -36,7 +36,7 @@
     // TO DO:
     /*
         next word/reset button
-        amount of wins
+        add words
 
     */
 
@@ -56,6 +56,11 @@
     let reset = function(){
         //when we are done this is pulled from an array but right now we are just using marie
         word = "MARIE";
+        typing = true;
+        guessedWord = "";
+        triedLetters = "";
+        document.getElementById ("triedKeys").textContent = "Letters you have tried will appear here." ; 
+
         for (let i = 0; i < word.length; i++) {
             guessedWord = guessedWord + "_";
         } 
