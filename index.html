@@ -15,51 +15,103 @@
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
         <h1 class="display-4">Guess the Word</h1>
+        <hr>
         <p class="lead" id="guessedWord"></p>
+        <hr>
+        <p class="lead" id="triedKeys">Letters you have tried will appear here.</p>
+        <hr>
+        <p class= "lead" id="guessCount">Guesses Remaining:</p>
+        <p class= "lead" id="winCount">Wins:</p>
+        <p class= "lead" id="lossCount">Losses:</p>
 
-        <p class="lead" id="triedKeys">The blanks and fill word will go here ...this space occupies the entire horizontal space of its parent.</p>
-        <button type="button" class="btn btn-primary">Start!</button>
+        <button type="button" class="btn btn-primary">Reset!</button>
     </div>
 </div>
+
 <!-- javascript -->
+
 <script>
+
+
+    // TO DO:
+    /*
+        you win alert
+        next word/reset button
+        amount of wins/losses
+
+    */
+
+
     let word = null;
     let correctLetter = "";
     let triedLetters = "";
+    let guessesLeft = null;
+    let typing = true;
+
+    /*************************************
+     * This shows the amount of blanks based on the word length
+    ************************************/
 
     let reset = function(){
         //when we are done this is pulled from an array but right now we are just using marie
         word = "MARIE";
         for (let i = 0; i < word.length; i++) {
             correctLetter = correctLetter + "_";
-        }            
+        } 
 
         document.getElementById ("guessedWord").textContent = correctLetter ; 
 
+    /*************************************
+     * This counts wrong guesses
+    ************************************/
 
+    guessesLeft = (word.length * 2);
+    document.getElementById ("guessCount").textContent = "Remaining Guesses: " + guessesLeft ; 
+
+        
     }
 
     reset();
 
-
-    // TO DO:
-
+    
+    /*************************************
+     * This sets the correct letter into the blank
+     ************************************/
     let correct = function(typedLetter){
-        if (word.includes(typedLetter)) {
                     
-            for (let i = 0; i < word.length; i++) { // Loops through every letter in word. index = x
-                if(word.charAt(i) === typedLetter){ // Letter in word = typedLetter
-                    correctLetter = correctLetter.substr(0,i) + typedLetter + correctLetter.substr(i+1); //replace index x in correctLetter with typedLetter
-                }
+        for (let i = 0; i < word.length; i++) { // Loops through every letter in word. index = x
+            if(word.charAt(i) === typedLetter){ // Letter in word = typedLetter
+                correctLetter = correctLetter.substr(0,i) + typedLetter + correctLetter.substr(i+1); //replace index x in correctLetter with typedLetter
             }
-            document.getElementById ("guessedWord").textContent = correctLetter ; 
         }
+        document.getElementById ("guessedWord").textContent = correctLetter ; 
+    }
 
+    /*************************************
+     * This determines guesses left and alerts when you lose
+     ************************************/
 
+    let incorrect = function(typedLetter){
+        guessesLeft--;
+        document.getElementById ("guessCount").textContent = "Remaining Guesses: " + guessesLeft ; 
+
+        if (guessesLeft === 0) {
+            document.getElementById ("guessCount").textContent = "YOU LOSE!" ; 
+            typing = false;
+
+        }
 
     }
 
+     /*************************************
+     * This allows you to only type letters and sends them to show where appropriate
+     ************************************/
+
     document.addEventListener('keydown', function(event) {
+
+        if (!typing) {
+            return;
+        }
 
         const keycode = event.keyCode;
         if (keycode > 64 && keycode < 91) {
@@ -70,7 +122,13 @@
                 triedLetters = triedLetters + typedLetter + " ";
                 document.getElementById ("triedKeys").textContent = triedLetters ;
                 
-                correct(typedLetter);
+                if (word.includes(typedLetter)) {
+
+                    correct(typedLetter);
+                }
+                else{
+                    incorrect(typedLetter);
+                }
 
 
             }
