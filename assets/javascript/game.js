@@ -94,8 +94,8 @@ document.addEventListener('keydown', function(event) {
 
         if (!triedLetters.includes(typedLetter)) {
 
-            triedLetters = triedLetters + typedLetter + " ";
-            document.getElementById ("triedKeys").textContent = triedLetters ;
+            triedLetters = triedLetters + typedLetter + "  ";
+            document.getElementById ("triedKeys").textContent = triedLetters;
             
             if (word.includes(typedLetter)) {
 
