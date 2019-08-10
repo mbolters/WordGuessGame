@@ -15,7 +15,7 @@
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
         <h1 class="display-4">Guess the Word</h1>
-        <p class="lead" id="guessedWord">Word</p>
+        <p class="lead" id="guessedWord"></p>
 
         <p class="lead" id="triedKeys">The blanks and fill word will go here ...this space occupies the entire horizontal space of its parent.</p>
         <button type="button" class="btn btn-primary">Start!</button>
@@ -23,22 +23,54 @@
 </div>
 <!-- javascript -->
 <script>
-    const word = "MARIE";
-
-
+    let word = null;
+    let correctLetter = "";
     let triedLetters = "";
+
+    let reset = function(){
+        //when we are done this is pulled from an array but right now we are just using marie
+        word = "MARIE";
+        for (let i = 0; i < word.length; i++) {
+            correctLetter = correctLetter + "_";
+        }            
+
+        document.getElementById ("guessedWord").textContent = correctLetter ; 
+
+
+    }
+
+    reset();
+
+
+    // TO DO:
+
+    let correct = function(typedLetter){
+        if (word.includes(typedLetter)) {
+                    
+            for (let i = 0; i < word.length; i++) { // Loops through every letter in word. index = x
+                if(word.charAt(i) === typedLetter){ // Letter in word = typedLetter
+                    correctLetter = correctLetter.substr(0,i) + typedLetter + correctLetter.substr(i+1); //replace index x in correctLetter with typedLetter
+                }
+            }
+            document.getElementById ("guessedWord").textContent = correctLetter ; 
+        }
+
+
+
+    }
 
     document.addEventListener('keydown', function(event) {
 
         const keycode = event.keyCode;
         if (keycode > 64 && keycode < 91) {
+            const typedLetter = String.fromCharCode(keycode);
 
-            if (!triedLetters.includes(String.fromCharCode(keycode))) {
+            if (!triedLetters.includes(typedLetter)) {
 
-                triedLetters = triedLetters + String.fromCharCode(keycode) + " ";
+                triedLetters = triedLetters + typedLetter + " ";
                 document.getElementById ("triedKeys").textContent = triedLetters ;
                 
-
+                correct(typedLetter);
 
 
             }
