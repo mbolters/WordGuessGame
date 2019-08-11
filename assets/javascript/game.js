@@ -2,7 +2,7 @@
  * Variables *
  *************/
 
-const TERMS = ["ALLAN", "MARIE", 'ATTILA', 'EMILY']
+const TERMS = ["BERNARD", "YASHA", "TANYA", "EMILY"]
 let word = null;
 let guessedWord = "";
 let triedLetters = "";
@@ -23,6 +23,8 @@ let reset = function(){
     guessedWord = "";
     triedLetters = "";
     document.getElementById ("triedKeys").textContent = "Letters you have tried will appear here." ; 
+    document.getElementById("myImg").src = "";
+
 
     for (let i = 0; i < word.length; i++) {
         guessedWord = guessedWord + "_";
@@ -54,6 +56,8 @@ let correct = function(typedLetter){
         typing = false;
         sound.src = 'assets/images/happykids.mp3';
         sound.play();
+        document.getElementById("myImg").src = "assets/images/family.jpg";
+
     }
     document.getElementById ("guessedWord").textContent = guessedWord ; 
 }
@@ -74,11 +78,14 @@ let incorrect = function(typedLetter){
         typing = false;
         sound.src = 'assets/images/boo2.mp3';
         sound.play();
+
+        document.getElementById("myImg").src = "assets/images/feivel crying.jpg";
     }
+    
 
 }
 
-    /********************************************************************************
+/*********************************************************************************
  * This allows you to only type letters and sends them to show where appropriate *
  *********************************************************************************/
 

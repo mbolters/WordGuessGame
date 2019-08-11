@@ -1,1 +1,26 @@
-#blanks
+.jumbotron {
+    background-image: url(https://i.ytimg.com/vi/pn9690LjCmw/maxresdefault.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+
+   .headerFont {
+    font-family: Luminari, fantasy, serif;
+    font-weight: bolder;
+    color: red;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+  }
+  .font {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+  }
+.container {
+    height: 1000px;
+}
+    
