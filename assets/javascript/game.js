@@ -17,7 +17,6 @@ const sound = new Audio();
 *************************************************************************/
 
 let reset = function(){
-    //when we are done this is pulled from an array but right now we are just using marie
     word = TERMS[Math.floor(Math.random()*TERMS.length)];
     typing = true;
     guessedWord = "";
